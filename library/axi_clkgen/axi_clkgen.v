@@ -37,7 +37,7 @@
 module axi_clkgen #(
 
   parameter         ID = 0,
-  parameter         DEVICE_TYPE = 0,
+  parameter         DEVICE_TYPE = 2,
   parameter real    CLKIN_PERIOD  = 5.000,
   parameter real    CLKIN2_PERIOD  = 5.000,
   parameter integer VCO_DIV = 11,
@@ -142,7 +142,9 @@ module axi_clkgen #(
 
   // processor interface
 
-  up_clkgen i_up_clkgen (
+  up_clkgen #(
+    .ID(ID)
+  ) i_up_clkgen (
     .mmcm_rst (mmcm_rst),
     .clk_sel (clk_sel),
     .up_drp_sel (up_drp_sel_s),
