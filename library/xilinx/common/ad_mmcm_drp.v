@@ -182,15 +182,25 @@ module ad_mmcm_drp #(
       .CLKOUT4_CASCADE ("FALSE"),
       .COMPENSATION ("AUTO"),
       .STARTUP_WAIT ("FALSE"),
-      .DIVCLK_DIVIDE (1),
-      .CLKFBOUT_MULT_F (10.000),
+
+      .DIVCLK_DIVIDE (MMCM_VCO_DIV),
+      .CLKFBOUT_MULT_F (MMCM_VCO_MUL),
       .CLKFBOUT_PHASE (0.000),
       .CLKFBOUT_USE_FINE_PS ("FALSE"),
-      .CLKOUT0_DIVIDE_F (10.000),
-      .CLKOUT0_PHASE (0),
+      .CLKOUT0_DIVIDE_F (MMCM_CLK0_DIV),
+      .CLKOUT0_PHASE (MMCM_CLK0_PHASE),
       .CLKOUT0_DUTY_CYCLE (0.500),
       .CLKOUT0_USE_FINE_PS ("FALSE"),
-      .CLKIN1_PERIOD (10.000),
+      .CLKOUT1_DIVIDE (MMCM_CLK1_DIV),
+      .CLKOUT1_PHASE (MMCM_CLK1_PHASE),
+      .CLKOUT1_DUTY_CYCLE (0.500),
+      .CLKOUT1_USE_FINE_PS ("FALSE"),
+      .CLKOUT2_DIVIDE (MMCM_CLK2_DIV),
+      .CLKOUT2_PHASE (MMCM_CLK2_PHASE),
+      .CLKOUT2_DUTY_CYCLE (0.500),
+      .CLKOUT2_USE_FINE_PS ("FALSE"),
+      .CLKIN1_PERIOD (MMCM_CLKIN_PERIOD),
+      .CLKIN2_PERIOD (MMCM_CLKIN2_PERIOD),
       .REF_JITTER1 (0.010))
     i_mmcme3 (
       .CLKIN1 (clk),
@@ -234,7 +244,7 @@ module ad_mmcm_drp #(
       BUFG i_clk_1_bufg   (.I (mmcm_clk_1_s),   .O (mmcm_clk_1));
       BUFG i_clk_2_bufg   (.I (mmcm_clk_2_s),   .O (mmcm_clk_2));
 
-  end else if (MMCM_DEVICE_TYPE == 1) begin /* MMCM_DEVICE_TYPE == 1 */
+  end else if (MMCM_DEVICE_TYPE == MMCM_DEVICE_VIRTEX6) begin 
 
     MMCM_ADV #(
       .BANDWIDTH ("OPTIMIZED"),
